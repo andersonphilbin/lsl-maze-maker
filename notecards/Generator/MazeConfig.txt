@@ -1,0 +1,14 @@
+XSpace=1.5 #Cell size, X value
+YSpace=1.5 #Cell size, Y value
+XCount=10 #Number of cells, X direction
+YCount=8 #Number of cells, Y direction
+Thick=0.6#Wall thickness (X or Y, depending on which way the wall goes)
+Height=4.0#Wall height (Z)
+MaxLength=10.0#Maximum length of a wall prim
+XOffset=-7.5#Cell(0, 0) is at generator position + <XOffset, YOffset, ZOffset>
+YOffset=-6.0#
+ZOffset=-3.0#
+NGate=0#1=Gate in North perimeter wall
+EGate=1#1=Gate in East perimeter wall
+WGate=1#1=Gate in West perimeter wall
+SGate=0#1=Gate in South perimeter wall

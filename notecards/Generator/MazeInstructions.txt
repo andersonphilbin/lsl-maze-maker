@@ -1,0 +1,107 @@
+Section A. Quick Instructions:
+==================
+
+1. Drag the Maze Generator onto the ground on your land.
+2. Edit the Maze Config notecard in its contents.
+3. Touch the Maze Generator and select Perimeter.
+4. Touch again and select Generate.
+5. If you don't like your maze, select Delete and go back to step 3.
+6. Touch again and select Lock.
+7. Take the Maze Generator back into inventory.
+8. Put a floor under the maze, link and decorate it as desired.
+
+Section B. Detailed instructions:
+====================
+
+1. The Maze Generator object is No Copy even though I have ticked "Copy". Be careful you don't accidentally delete it. Make sure you build where you have permission.
+
+2. All mazes are a rectangular grid of cells with walls on the cell boundaries. Gaps are left in the walls to make a maze. Walls are made up of multiple copies of the included Maze wall prim. You have to configure the number of cells in the X and Y directions and the size of the cells.
+
+This is the content of the default Maze Config notecard:
+
+XSpace=1.5 #Cell size, X value
+YSpace=1.5 #Cell size, Y value
+XCount=10 #Number of cells, X direction
+YCount=8 #Number of cells, Y direction
+Thick=0.6#Wall thickness (X or Y, depending on which way the wall goes)
+Height=4.0#Wall height (Z)
+MaxLength=10.0#Maximum length of a wall prim
+XOffset=-7.5#Cell(0, 0) is at generator position + <XOffset, YOffset, ZOffset>
+YOffset=-6.0#
+ZOffset=-3.0#
+NGate=0#1=Gate in North perimeter wall
+EGate=1#1=Gate in East perimeter wall
+WGate=1#1=Gate in West perimeter wall
+SGate=0#1=Gate in South perimeter wall
+
+Firstly, please note that all data values in the notecard must be terminated with "#". Text following the "#" is just a comment.
+
+The "XSpace" and "YSpace" values are the dimensions of each cell.  The "XCount" and "YCount" values are the number of cells.  The total size of the maze is (XCount x XSpace) in the X direction and (YCount x YSpace) in the Y direction.
+
+"Thick" is the wall thickness. The usable passageway width in the maze is XSpace - Thick (in the X direction) and YSpace - Thick (in the Y direction).
+
+<"XOffset", "YOffset", "ZOffset"> describe a vector from the position of the Maze Generator prim to the location of the first cell (the South West-most cell). This location should not be more than 10 metres away due to LSL limits.
+
+"NGate", "EGate", "WGate" and "SGate" describe which perimiter walls you would like the entrance/exit to be. The opening is always at the left-hand end of the wall when viewed from the outside. "0" means no gate, "1" means a gate. No other values are meaningful.
+
+3-7. The menu options are as follows:
+
+a. "Perimeter" builds a perimeter wall around the maze using the Maze wall prim. Gates will be set in the wall as configured in the notecard.
+b. "Generate" builds the interior of the maze.
+c. "Delete" sends a message to each wall prim to delete itself and then resets the list of prims in internal memory. I'm making a point of describing this function in this way because sometimes the prim communication process and you have to delete the prims manually.
+d. "Lock" sends a message to each wall prim to delete its script and then resets the list of prims in internal memory. This function is subject to the caveats as Delete. You should check a few prims after locking to ensure they no longer have scripts.
+e. "Reposition" tells the Maze Generator that you have moved it.  It's a good idea to select this function before building walls, just to be certain that the script knows its position.
+f. "Instructions" gives you this notecard.
+g. "Dump data" lists the contents of the Maze Config notecard.
+
+
+Section C: MAZE WALL:
+==============
+
+You will almost certainly want to change the texture on the Maze wall before creating your maze. This is the technique I used when testing. I will happily receive any ideas on how to make this easier.
+
+1. Drag the Maze wall prim out the Maze Generator contents, onto your land.
+
+2. Set the texture as desired. I recommend using Planar Mapping for textures because the same prim is used in different sizes. Planar mapping keeps the texture from being stretched and squashed. Set Color, Transparency, Glow etc.
+
+3. Now is a good time to install any special scripts you want to be in every prim e.g. texture animation.
+
+4. Take the Maze wall prim into your inventory.
+
+5. Delete the Maze wall prim from the contents of the Maze Generator.
+
+6. Drag your new Maze wall prim onto the contents of the Maze Generator.
+
+I have observed that the modified wall prim says "No Modify" but it's not true. It contains a "No Modify" script but you can continue to modify the prim following steps 1-6 above on each cycle.
+
+
+Section D: Notes:
+===========
+
+Mazes can be fun but they can also be disorienting and frustrating, especially given the limits of the SL UI. You shouldn't allow your players to see the top of the maze unless it's really complex. However, it's good to provide orientation aids where appropriate. For example, you could put a roof on the maze that has a transparent texture on the underside so the players can see out, but opaque on the top so they can't cheat.
+
+The Perimeter step is separate from maze wall generation because the perimeter is optional and may have other puposes e.g. buidling a castle wall. There's also no requirement to have any gates at all. Entrances and exits can be in the floor or ceiling or teleports can be used. You can also lock the perimeter before generating the maze walls (and vice versa).
+
+Feel free to decorate your completed maze with arches, secret doors, easter eggs, hazards etc. You could also build a 3-d maze by stacking multiple levels and then adding stairs. Just move the Maze Generator vertically by the height of the wall plus floor thickness, select Reposition, then Perimeter (optional), then Generate and finally Lock.
+
+I wrote the code for the maze generator, but the algorithm is the one documented at http://en.wikipedia.org/wiki/Maze_generation_algorithm#Recursive_division_method. This algorithm creates reasonably interesting mazes although they are sometimes a bit too simple. However, one of their useful properties is that exits and entrances can be put where desired. You just have to check the path.
+
+I shouldn't have to say this, but, this is not a griefing tool. It can generate hundreds of prims in a few seconds. Please ensure you build only where you have permission.
+
+
+Section E: Support:
+============
+
+If you have any problems with the instructions, scripts or supplied prims, please contact Anderson Philbin via IM. My Ims go through to email, so none should be lost.
+
+Two problems are known to occur:
+
+1. If the rule about <"XOffset", "YOffset", "ZOffset"> being greater than 10 metres is violated, then no prims will be generated. If you get no prims after selecting Perimeter or Generate, please check this setting and reduce it to a small value.
+
+2. If the generated prims are embedded into the ground, the ground will push them back up. When this occurs, the script in the wall prim is reset and loses communication with the Maze Generator. This means you will have to delete the prims manually. You can tell when this occurs because the top surface of the affected prims will be higher. Generate your maze at a higher elevation.
+
+
+Enjoy
+
+Anderson Philbin
+13 April 2009

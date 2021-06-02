@@ -1,0 +1,12 @@
+Andy's Maze Maker is a configurable maze generator. Create rectangular mazes as large as a whole sim, or as small as an earring.
+
+You decide on the number of X and Y cells and press Generate. You can set the texture for the walls. Don't like your maze? Just press Delete and it's gone again. When you have a maze you like, press Lock.
+
+Perimeter walls are optional (and the position of the entrances). However, you will have to provide your own floor.
+
+Permissions are: No Copy/Mod/No Transfer. Price L$500.
+
+
+Enjoy
+
+Anderson Philbin
